@@ -1,8 +1,14 @@
-// Global app controller
+import axios from 'axios';
 
-import num from './test';
+async function getResults(query){
+  const proxy = 'https://cors-anywhere.herokuapp.com/';
+  const apikey = '4b943e043588f1fc8cd5a56a1c23e32c';
+  const result = await axios.get(`${proxy}http://food2fork.com/api/search?key=${apikey}&q=${query}`);
+  console.log(result);
+}
 
-const test = 'testing babel';
-console.log(`even testen hoor: ${test}`);
+getResults('pizza');
 
-console.log(num);
+
+// 4b943e043588f1fc8cd5a56a1c23e32c   =API
+// http://food2fork.com/api/search    =Request url
