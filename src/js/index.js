@@ -1,4 +1,5 @@
 import Search from './models/Search';
+import * as searchView from './views/searchView';
 
 /*
   State hier is normaal je store in redux; simpel gebruik van state, wat je anders managed met react en redux
@@ -14,8 +15,8 @@ const state = {};
 
 const controlSearch = async () => {
   // get query from input
+  searchView.getInput();
   const query = 'fish';
-  console.log(state);
 
   if(query){
     // set state to search query
