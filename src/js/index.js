@@ -15,8 +15,8 @@ const state = {};
 
 const controlSearch = async () => {
   // get query from input
-  searchView.getInput();
-  const query = 'fish';
+  const query = searchView.getInput();
+  console.log(query);
 
   if(query){
     // set state to search query
@@ -27,7 +27,7 @@ const controlSearch = async () => {
     // search for recipes
     await state.search.getResults();
     console.log(state.search.result);
-    console.log(state);
+    searchView.renderResults(state.search.result);
     // show results on UI
   }
 }
