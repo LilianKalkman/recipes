@@ -9,6 +9,10 @@ export const clearInput = () => {
   elements.searchInput.value = '';
 }
 
+export const clearResults = () => {
+  elements.searchList.innerHTML = '';
+}
+
 const renderRecipe = recipe => {
   const html = `
     <li>
