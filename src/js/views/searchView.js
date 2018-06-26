@@ -5,6 +5,10 @@ export const getInput = () => {
   return input;
 }
 
+export const clearInput = () => {
+  elements.searchInput.value = '';
+}
+
 const renderRecipe = recipe => {
   const html = `
     <li>
