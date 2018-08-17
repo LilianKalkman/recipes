@@ -43,7 +43,11 @@ document.querySelector('.search').addEventListener('submit', e => {
   controlSearch();
 })
 
-// const search1 = new Search('salmon');
-// console.log(search1);
-//
-// search1.getResults();
+document.querySelector('.results__pages').addEventListener('click', e => {
+  const btn = e.target.closest('.btn-inline');
+  if(btn){
+    const nextPage = parseInt(btn.dataset.goto);
+    searchView.clearResults();
+    searchView.renderResults(state.search.result, nextPage)
+  }
+})
