@@ -1,5 +1,6 @@
 import Search from './models/Search';
 import * as searchView from './views/searchView';
+import {elements, renderLoader, clearLoader} from './views/elements';
 
 /*
   State hier is normaal je store in redux; simpel gebruik van state, wat je anders managed met react en redux
@@ -25,12 +26,15 @@ const controlSearch = async () => {
     // prep UI for results
     searchView.clearInput();
     searchView.clearResults();
-    
+    renderLoader(elements.resultsDiv);
+
     // search for recipes
     await state.search.getResults();
     console.log(state.search.result);
-    searchView.renderResults(state.search.result);
+
     // show results on UI
+    clearLoader();
+    searchView.renderResults(state.search.result);
   }
 }
 
