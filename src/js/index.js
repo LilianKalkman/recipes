@@ -41,8 +41,7 @@ const controlSearch = async () => {
 
 
 const r = new Recipe(48364);
-const recipe = r.getRecipe();
-console.log(recipe);
+r.getRecipe();
 
 
 document.querySelector('.search').addEventListener('submit', e => {

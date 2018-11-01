@@ -6,7 +6,7 @@ export const elements = {
 
 export const renderLoader = parent => {
   const loader = `
-  <div className="loader">
+  <div class="loader">
     <svg>
       <use href="img/icons.svg#icon-cw"></use>
     </svg>
