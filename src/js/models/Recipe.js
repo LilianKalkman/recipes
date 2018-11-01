@@ -9,14 +9,12 @@ export default class Recipe {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const apikey = '4b943e043588f1fc8cd5a56a1c23e32c';
     try {
-      const result = await axios.get(`${proxy}http://food2fork.com/api/search?key=${apikey}&rId=${this.id}`);
-      console.log(result);
+      const result = await axios.get(`${proxy}http://food2fork.com/api/get?key=${apikey}&rId=${this.id}`);
       this.title = result.data.recipe.title;
       this.author = result.data.recipe.publisher;
       this.img = result.data.recipe.image_url;
       this.url = result.data.recipe.source_url;
       this.ingredients = result.data.recipe.ingredients;
-      console.log(this);
     } catch(error){
       console.log(error);
     }

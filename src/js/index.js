@@ -40,14 +40,14 @@ const controlSearch = async () => {
 }
 
 
-const r = new Recipe(48364);
-r.getRecipe();
+// const r = new Recipe(48364);
+// r.getRecipe();
 
 
 document.querySelector('.search').addEventListener('submit', e => {
   e.preventDefault();
   controlSearch();
-})
+});
 
 document.querySelector('.results__pages').addEventListener('click', e => {
   const btn = e.target.closest('.btn-inline');
@@ -57,4 +57,31 @@ document.querySelector('.results__pages').addEventListener('click', e => {
     searchView.clearResults();
     searchView.renderResults(state.search.result, nextPage)
   }
-})
+});
+
+
+const controlRecipe = async () => {
+  const id = location.hash.replace('#', '');
+
+  if(id){
+
+    state.recipe = new Recipe(id);
+
+    try {
+      await state.recipe.getRecipe();
+
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+
+      console.log(state.recipe);
+    } catch(error){
+      console.log(error);
+    }
+
+  }
+};
+
+
+
+addEventListener('hashchange', controlRecipe);
+addEventListener('load', controlRecipe);
