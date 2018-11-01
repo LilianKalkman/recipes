@@ -51,6 +51,7 @@ document.querySelector('.search').addEventListener('submit', e => {
 
 document.querySelector('.results__pages').addEventListener('click', e => {
   const btn = e.target.closest('.btn-inline');
+  console.log(btn);
   if(btn){
     const nextPage = parseInt(btn.dataset.goto);
     searchView.clearResults();
