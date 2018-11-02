@@ -43,9 +43,49 @@ export default class Recipe {
       });
 
       // haakjes weg
-      ingredient = ingredient.replace(/ *\([^)]*\) */g, "");
+      ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
 
-      return ingredient;
+      // get count, unit and ingredient
+      const arrIng = ingredient.split(' ');
+      const unitIndex = arrIng.findIndex(el2 => unitsShort.includes(el2));
+
+      let ingObj;
+
+      if(unitIndex >= 0){
+        // there is a unit
+        const arrCount = arrIng.slice(0, unitIndex);
+        let count;
+
+        if(arrCount.length === 1){
+          count = eval(arrCount[0].replace('-', '+'));
+        } else {
+          count = eval(arrIng.slice(0, unitIndex).join('+'));
+        };
+
+        ingObj = {
+          count,
+          unit: arrIng[unitIndex],
+          ingredient: arrIng.slice(unitIndex + 1).join(' ')
+        };
+
+      } else if(parseInt(arrIng[0])){
+        // no unit, wel number
+        ingObj = {
+          count: parseInt(arrIng[0]),
+          unit: '',
+          ingredient: arrIng.slice(1).join(' ')
+        }
+
+      } else {
+        // no unit and no number; only text
+        ingObj = {
+          count: 1,
+          unit: '',
+          ingredient
+        };
+      };
+
+      return ingObj;
 
     });
 
