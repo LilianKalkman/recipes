@@ -1,6 +1,7 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 import {elements, renderLoader, clearLoader} from './views/elements';
 
 /*
@@ -75,13 +76,13 @@ const controlRecipe = async () => {
       state.recipe.parseIngredients();
 
       console.log(state.recipe);
+      recipeView.renderRecipe(state.recipe);
     } catch(error){
       console.log(error);
     }
 
   }
 };
-
 
 
 addEventListener('hashchange', controlRecipe);
