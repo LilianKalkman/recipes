@@ -1,5 +1,9 @@
 const recipeHTML = document.querySelector('.recipe');
 
+export const clearRecipe = () => {
+  recipeHTML.innerHTML = '';
+}
+
 export const renderRecipe = recipe => {
   const html = `
 
@@ -57,10 +61,10 @@ export const renderRecipe = recipe => {
                         <div class="recipe__count">${ing.count}</div>
                         <div class="recipe__ingredient">
                             <span class="recipe__unit">${ing.unit}</span>
-                            pasta
+                            ${ing.ingredient}
                         </div>
                     </li>`
-        })};
+        }).join('')}
       </ul>
 
       <button class="btn-small recipe__btn">

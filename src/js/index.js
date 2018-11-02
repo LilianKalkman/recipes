@@ -3,6 +3,7 @@ import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import {elements, renderLoader, clearLoader} from './views/elements';
+const recipeHTML = document.querySelector('.recipe');
 
 /*
   State hier is normaal je store in redux; simpel gebruik van state, wat je anders managed met react en redux
@@ -65,6 +66,8 @@ const controlRecipe = async () => {
   const id = location.hash.replace('#', '');
 
   if(id){
+    recipeView.clearRecipe();
+    renderLoader(recipeHTML);
 
     state.recipe = new Recipe(id);
 
@@ -74,8 +77,9 @@ const controlRecipe = async () => {
       state.recipe.calcTime();
       state.recipe.calcServings();
       state.recipe.parseIngredients();
-
       console.log(state.recipe);
+
+      clearLoader();
       recipeView.renderRecipe(state.recipe);
     } catch(error){
       console.log(error);
