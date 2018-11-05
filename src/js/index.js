@@ -66,6 +66,7 @@ const controlRecipe = async () => {
   const id = location.hash.replace('#', '');
 
   if(id){
+    searchView.highlightListItem(id);
     recipeView.clearRecipe();
     renderLoader(recipeHTML);
 

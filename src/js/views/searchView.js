@@ -14,6 +14,10 @@ export const clearResults = () => {
   document.querySelector('.results__pages').innerHTML = '';
 };
 
+export const highlightListItem = id => {
+  document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+};
+
 const limitRecipeTitle = (title, limit = 17) => {
   const newtitle = [];
   if(title.length > limit){
