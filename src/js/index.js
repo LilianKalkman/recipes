@@ -94,13 +94,13 @@ addEventListener('hashchange', controlRecipe);
 addEventListener('load', controlRecipe);
 
 recipeHTML.addEventListener('click', e => {
-  console.log(e.target);
-  if(e.target.matches('.btn-decrease', '.btn-decrease *')){
+  // e.target.matches pakt hij niet! Oplossen...
+  if(e.target.matches('.btn-decrease, .btn-decrease *')){
     if(state.recipe.servings > 1){
       state.recipe.updateServings('-');
       recipeView.updateRecipe(state.recipe);
     };
-  } else if (e.target.matches('btn-increase', '.btn-increase *')) {
+  } else if (e.target.matches('btn-increase, .btn-increase *')) {
     state.recipe.updateServings('+');
     recipeView.updateRecipe(state.recipe);
   };
