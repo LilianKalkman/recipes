@@ -7,6 +7,7 @@ import * as listView from './views/listView';
 import {elements, renderLoader, clearLoader} from './views/elements';
 
 const recipeHTML = document.querySelector('.recipe');
+const shoppingHTML = document.querySelector('.shopping');
 
 /*
   State hier is normaal je store in redux; simpel gebruik van state, wat je anders managed met react en redux
@@ -19,6 +20,7 @@ const recipeHTML = document.querySelector('.recipe');
 */
 
 const state = {};
+window.state = state;
 
 const controlSearch = async () => {
   // get query from input
@@ -121,5 +123,15 @@ recipeHTML.addEventListener('click', e => {
     recipeView.updateRecipe(state.recipe);
   } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
     controlList();
+  };
+});
+
+shoppingHTML.addEventListener('click', e => {
+  const id = e.target.closest('.shopping__item').dataset.itemid;
+  if (e.target.matches('.shopping__delete, .shopping__delete *')){
+    state.list.deleteItem(id);
+    listView.deleteListItem(id);
+  } else if (e.target.matches('.shopping__count-value')) {
+    state.list.updateCount(id, parseFloat(e.target.value));
   };
 });
