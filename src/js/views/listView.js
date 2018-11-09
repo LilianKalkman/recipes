@@ -1,7 +1,6 @@
-const listBTN = document.querySelector('.recipe__btn');
 const shoppingList = document.querySelector('.shopping__list');
 
-export const renderShopList = (item) => {
+export const renderItem = (item) => {
   const html = `
     <li class="shopping__item" data-itemid=${item.id}>
         <div class="shopping__count">
@@ -17,4 +16,9 @@ export const renderShopList = (item) => {
     </li>
   `;
   shoppingList.insertAdjacentHTML('beforeend', html);
-}
+};
+
+export const deleteListItem = (id) => {
+  const item = document.querySelector(`[data-itemid="${id}]"`);
+  item.parentElement.removeChild(item);
+};
