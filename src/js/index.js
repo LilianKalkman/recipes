@@ -1,8 +1,10 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import {elements, renderLoader, clearLoader} from './views/elements';
+
 const recipeHTML = document.querySelector('.recipe');
 
 /*
@@ -94,7 +96,6 @@ addEventListener('hashchange', controlRecipe);
 addEventListener('load', controlRecipe);
 
 recipeHTML.addEventListener('click', e => {
-  // e.target.matches pakt hij niet! Oplossen...
   if(e.target.matches('.btn-decrease, .btn-decrease *')){
     if(state.recipe.servings > 1){
       state.recipe.updateServings('-');
@@ -104,5 +105,6 @@ recipeHTML.addEventListener('click', e => {
     state.recipe.updateServings('+');
     recipeView.updateRecipe(state.recipe);
   };
-
 });
+
+// list "controller"
