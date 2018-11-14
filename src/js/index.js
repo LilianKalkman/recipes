@@ -5,6 +5,7 @@ import Likes from './models/Likes';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 import {elements, renderLoader, clearLoader} from './views/elements';
 
 const recipeHTML = document.querySelector('.recipe');
@@ -22,6 +23,8 @@ const shoppingHTML = document.querySelector('.shopping');
 
 const state = {};
 window.state = state;
+
+state.likes = new Likes();
 
 const controlSearch = async () => {
   // get query from input
@@ -87,7 +90,7 @@ const controlRecipe = async () => {
       console.log(state.recipe);
 
       clearLoader();
-      recipeView.renderRecipe(state.recipe);
+      recipeView.renderRecipe(state.recipe, state.likes.isLiked(id));
     } catch(error){
       console.log(error);
     }
@@ -159,8 +162,12 @@ const controlLike = () => {
 
   if(!state.likes.isLiked(id)){
     const newLike = state.likes.addLike(id, state.recipe.title, state.recipe.author, state.recipe.img)
+    likesView.toggleHeart(true);
+    likesView.addLikeHTML(newLike);
   } else {
     state.likes.deleteLike(id);
+    likesView.deleteLikeHTML(id);
+    likesView.toggleHeart(false);
   }
 
   console.log(state.likes);
