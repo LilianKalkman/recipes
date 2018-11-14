@@ -1,6 +1,7 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
+import Likes from './models/Likes';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
@@ -123,7 +124,9 @@ recipeHTML.addEventListener('click', e => {
     recipeView.updateRecipe(state.recipe);
   } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
     controlList();
-  };
+  } else if (e.target.matches('.recipe__love, .recipe__love *')){
+    controlLike();
+  }
 });
 
 shoppingHTML.addEventListener('click', e => {
@@ -135,3 +138,31 @@ shoppingHTML.addEventListener('click', e => {
     state.list.updateCount(id, parseFloat(e.target.value));
   };
 });
+
+
+// Like controller
+
+/*
+  1. pak like knop, event listener
+  2. op basis daarvan pak je het id van het recept waar je op zit en maak je een new Like aan.
+  3. render je likes(list) op je screen (display none, alleen bij hover over hartje zichtbaar)
+  4. toggle CSS class voor liked of niet
+  5. handle delete like knop
+*/
+
+
+const controlLike = () => {
+  const id = state.recipe.id;
+  if(!state.likes) {
+    state.likes = new Likes();
+  }
+
+  if(!state.likes.isLiked(id)){
+    const newLike = state.likes.addLike(id, state.recipe.title, state.recipe.author, state.recipe.img)
+  } else {
+    state.likes.deleteLike(id);
+  }
+
+  console.log(state.likes);
+
+}
